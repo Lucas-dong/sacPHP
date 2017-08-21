@@ -37,11 +37,21 @@ class App {
 
 	public function resolve(){
 		$pathinfo = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '' ;
-		$pathinfo = explode('/' , trim($pathinfo , '/') );
-	print_r($pathinfo);
+		if(trim($pathinfo , '/') !== '') {
+			$pathinfo = explode('/' , trim($pathinfo , '/') );
+		} else {
+			$pathinfo = [];
+		}
+
 		$pathinfo = $pathinfo + ['Index' , 'index'];
 
-		print_r($pathinfo);
+		//分析地址栏参数
+		for($i=2,$len=count($pathinfo); $i<$len ; $i+=2) {
+			$_GET[$pathinfo[$i]] = $pathinfo[$i+1]; 
+		}
+		//print_r($_GET);
+		//print_r($pathinfo);
+		
 	}
 }
 
