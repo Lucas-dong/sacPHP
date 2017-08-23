@@ -6,7 +6,10 @@ class X extends XBase {
 }
 
 X::$classMap = [
-	'App' => X_PATH . '/Base/App.php'
+	'App' => X_PATH . '/Base/App.php',
+	'Controller' => X_PATH . '/Base/Controller.php',
+	'Model' => X_PATH . '/Base/Model.php',
+	'DB' => X_PATH . '/Base/DB.php'
 ];
 
 // spl_autoload_register(['X','autoload']);

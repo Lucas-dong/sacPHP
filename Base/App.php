@@ -32,7 +32,11 @@ class App {
 	 * 实例化控制器
 	 */
 	public function run(){
-		$this->resolve();
+		$ca = $this->resolve();
+
+		$controller = $ca[0].'Controller';
+		$action = $ca[1];
+		(new $controller())->$action();
 	}
 
 	public function resolve(){
@@ -51,7 +55,7 @@ class App {
 		}
 		//print_r($_GET);
 		//print_r($pathinfo);
-		
+		return [$pathinfo[0] , $pathinfo[1]];
 	}
 }
 

@@ -10,6 +10,10 @@ class XBase {
 	public static function autoload($class){
 		if(isset(self::$classMap[$class])) {
 			require(self::$classMap[$class]);
+		} else if(substr($class,-10) === 'Controller') {
+			require(APP_PATH . '/Controller/' . $class . '.php');
+		} else if(substr($class,-5) === 'Model') {
+			require(APP_PATH . '/Model/' . $class . '.php');
 		}
 	}
 
