@@ -1,6 +1,8 @@
 <?php 
 
 class DB extends PDO {
+	static public $table;
+
 	public function __construct() {
 		$cfg = require(APP_PATH . '/config.php');
 		$dsn = "mysql::host={$cfg['host']};dbname={$cfg['dbname']}";

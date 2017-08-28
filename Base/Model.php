@@ -6,7 +6,8 @@ class Model {
 	protected $fields = [];
 	protected $db = null;
 
-	protected $data = [];
+	protected $data;
+	protected $column = '*';
 
 	public function __construct(){
 		$this->db = new DB();
@@ -24,10 +25,10 @@ class Model {
 	//分析表名
 	public function parseTable() {
 		$this->table = substr(static::class, 0, -5);
+		$this->table = $this->db::table;
 		$sql = 'desc ' . $this->table;
 
 		$struct = $this->db->getAll($sql);
-		// var_dump($struct);
 
 		foreach($struct as $row) {
 			$this->fields[] = $row['Field'];
@@ -39,8 +40,17 @@ class Model {
 		}
 	}
 
+	public function fields($cols='*') {
+		$this->column = $cols;
+		return $this;
+	}
+
+	public function select() {
+		return $this->data = $this->db->getAll('select ' .$this->column. ' from '.$this->table);
+	}
+
 	public function find($id) {
-		return $this->data = $this->db->getRow('select * from '.$this->table.' where '.$this->pk.'=?',[$id]);
+		return $this->data = $this->db->getRow('select ' .$this->column. ' from '.$this->table.' where '.$this->pk.'=?',[$id]);
 	}
 
 	public function add(){
@@ -51,3 +61,4 @@ class Model {
 		return $this->db->insert($sql,array_values($this->data));
 	}
 }
+
