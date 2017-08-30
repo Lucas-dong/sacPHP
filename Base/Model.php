@@ -34,7 +34,6 @@ class Model
     public function parseTable()
     {
         $this->table = substr(static::class, 0, -5);
-        $this->table = self::table();
         $sql         = 'desc ' . $this->table;
 
         $struct = $this->db->getAll($sql);
@@ -47,12 +46,6 @@ class Model
             }
 
         }
-    }
-
-    public function table($tb)
-    {
-        $this->table = $tb;
-        return $this;
     }
 
     public function fields($cols = '*')

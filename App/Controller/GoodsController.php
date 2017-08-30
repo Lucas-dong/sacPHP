@@ -1,4 +1,6 @@
 <?php
+require X_PATH . '/Base/Model.php';
+// use Model;
 
 class GoodsController extends Controller
 {
@@ -17,9 +19,9 @@ class GoodsController extends Controller
         // $this->assign('title','今天');
         // $this->assign('content','哈哈');
 
-        // $user = new UserModel();
+        $user = new UserModel();
         // print_r($user);
-        Db::table('user');
+        // Db::table('user');
         // $data = $user->fields('age,uanme')->select();
         // print_r($data);
         $data = $user->fields('age,uanme')->find(2);
